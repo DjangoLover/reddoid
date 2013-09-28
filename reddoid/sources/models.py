@@ -14,3 +14,15 @@ class SourcesList(models.Model):
             return url_parts[-3] + '/' + url_parts[-1]
         else:
             return self.url
+
+
+class Post(models.Model):
+    # pid is for post id, taken from the service
+    pid = models.CharField(primary_key=True, max_length=120)
+    source = models.ForeignKey(Source)
+    created_time = models.DateTimeField(null=True)
+    content = models.TextField()
+    api_content = models.TextField()
+
+    def __unicode__(self):
+        return "Post from {}".format(self.source.url)
