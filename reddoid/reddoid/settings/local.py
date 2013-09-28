@@ -1,4 +1,5 @@
 from .base import *
+from .twitter import *
 
 import dj_database_url
 

@@ -36,3 +36,4 @@ nosetests.xml
 
 # project specific
 progress.db
+reddoid/reddoid/settings/twitter.py
