@@ -21,7 +21,9 @@ class GooglePlusSource(BaseSource):
                     pageToken=nextPageToken, maxResults=10,
                     key=settings.GOOGLE_PLUS_API_KEY).execute()
             nextPageToken = activities_list['nextPageToken']
-            if len(activities_list['items']):
+            if not len(activities_list['items']):
                 raise StopIteration()
             for post in activities_list['items']:
-                yield post['object']['content']
+                yield {
+                    'id': post['id'],
+                    'content': post['object']['content']}
