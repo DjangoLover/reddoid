@@ -1,3 +1,5 @@
+TEST_APP=sources
+
 run:
 	reddoid/manage.py runserver --settings=reddoid.settings.local
 
@@ -7,7 +9,7 @@ syncdb:
 migrate:
 	reddoid/manage.py migrate --settings=reddoid.settings.local
 
-test:
+shell:
 	reddoid/manage.py shell --settings=reddoid.settings.local
 
 test:
