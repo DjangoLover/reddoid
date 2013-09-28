@@ -1,2 +1,2 @@
 run:
-	reddoid/manage.py runserver
+	reddoid/manage.py runserver --settings=reddoid.settings.local

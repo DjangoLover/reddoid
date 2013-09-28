@@ -1,7 +1,7 @@
 from os.path import abspath, basename, dirname, join, normpath
 # Django settings for reddoid project.
 
-DJANGO_ROOT = dirname(abspath(__file__))
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 SITE_ROOT = dirname(DJANGO_ROOT)
 
 DEBUG = True
@@ -125,6 +125,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'reddoid',
+    'sources',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
