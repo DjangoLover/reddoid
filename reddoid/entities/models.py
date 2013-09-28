@@ -8,7 +8,10 @@ class Link(models.Model):
     title = models.TextField(null=True)
     score = models.IntegerField(default=0)
 
+    def __unicode__(self):
+        return self.url
+
 
 class LinkPost(models.Model):
     link = models.ForeignKey(Link)
-    Post = models.ForeignKey(Post)
+    post = models.ForeignKey(Post)
