@@ -18,5 +18,5 @@ class Command(BaseCommand):
                 source = TwitterSource(screen_name=screen_name)
                 for tweet in source.fetch():
                     print tweet['content']
-                post, is_created = Post.objects.get_or_create(
-                    pid=tweet['id'], content=tweet['content'], source_id=s.id)
+                    post, is_created = Post.objects.get_or_create(
+                        pid=tweet['id'], content=tweet['content'], source_id=s.id)
