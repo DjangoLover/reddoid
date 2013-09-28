@@ -5,22 +5,12 @@ from django.conf import settings
 from .base import BaseSource
 
 
-
 class GooglePlusSource(BaseSource):
 
     def __init__(self, uid):
         service = build('plus', 'v1')
         self.activities = service.activities()
         self.uid = uid
-
-    def _links(self, content):
-        return 'links %s' % content['title']
-
-    def _pictures(self, content):
-        return 'pictures %s' % content['title']
-
-    def _videos(self, content):
-        return 'images %s' % content['title'] 
 
     def fetch(self):
         nextPageToken = None
@@ -31,8 +21,7 @@ class GooglePlusSource(BaseSource):
                     pageToken=nextPageToken, maxResults=10,
                     key=settings.GOOGLE_PLUS_API_KEY).execute()
             nextPageToken = activities_list['nextPageToken']
+            if len(activities_list['items']):
+                raise StopIteration()
             for post in activities_list['items']:
-                yield {
-                        'links': _links(post),
-                        'pictures': _picturse(post),
-                        'videos': _videos(post)}
+                yield post['object']['content']
