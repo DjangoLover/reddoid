@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     'reddoid.views',
-    url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^load_source/$', 'load_source', name='load-source'),
 )
 
