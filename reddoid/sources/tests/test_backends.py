@@ -9,7 +9,7 @@ from .factories import google_plus_feed_factory
 
 class GooglePlusBackendTestCase(TestCase):
 
-    @patch('sources.backends.google_plus.GooglePlusSource', google_plus_feed_factory)
+    @patch('sources.backends.google_plus.GooglePlusSource.fetch', google_plus_feed_factory)
     def test_google_source(self):
         source = GooglePlusSource(uid='108114175145093679567')
         counter = 0
@@ -17,4 +17,6 @@ class GooglePlusBackendTestCase(TestCase):
             counter += 1
             if counter > 5:
                 break
-            print s
+            # Just smoke test
+            self.assertTrue(s['content'])
+        self.assertEqual(counter, 6)
