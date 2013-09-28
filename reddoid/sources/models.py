@@ -22,6 +22,16 @@ class Source(models.Model):
             if result:
                 return result.group(1)
 
+    def __unicode__(self):
+        if 'twitter' in self.url:
+            url_parts = self.url.split('/')
+            if len(url_parts) > 1:
+                return "twitter: " + url_parts[-1]
+            else:
+                return "twitter source"
+        else:
+            return self.url
+
 
 class SourcesList(models.Model):
     url = models.URLField(null=False)
