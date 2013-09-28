@@ -164,3 +164,11 @@ LOGGING = {
         },
     }
 }
+
+# python social auth
+AUTHENTICATION_BACKENDS = (
+      'social.backends.google.GoogleOAuth',
+      'social.backends.facebook.FacebookOAuth2',
+      'social.backends.twitter.TwitterOAuth',
+      'django.contrib.auth.backends.ModelBackend',
+)
