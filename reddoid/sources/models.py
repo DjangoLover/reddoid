@@ -1,8 +1,26 @@
+import re
+
 from django.db import models
+
+
+SOURCE_REGEXPS = [
+    re.compile('.+/(\d{21})/.+'),
+    re.compile('https://twitter.com/(\w+)'),
+]
 
 
 class Source(models.Model):
     url = models.URLField(null=False)
+
+    @property
+    def uid(self):
+        """
+        Get user id from url
+        """
+        for r in SOURCE_REGEXPS:
+            result = r.match(self.url)
+            if result:
+                return result.group(1)
 
     def __unicode__(self):
         if 'twitter' in self.url:
