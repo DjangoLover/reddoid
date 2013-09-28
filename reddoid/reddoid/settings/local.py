@@ -1,5 +1,6 @@
 from .base import *
 from .twitter import *
+from .google_plus import *
 
 import dj_database_url
 

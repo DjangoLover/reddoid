@@ -3,3 +3,9 @@ run:
 
 syncdb:
 	reddoid/manage.py syncdb --settings=reddoid.settings.local
+
+test:
+	reddoid/manage.py shell --settings=reddoid.settings.local
+
+test:
+	reddoid/manage.py test $TEST_APP --settings=reddoid.settings.local
