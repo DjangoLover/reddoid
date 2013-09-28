@@ -24,5 +24,6 @@ class TwitterSource(BaseSource):
         for tweet in tweets:
             yield {
                 'id': tweet['id'],
-                'content': tweet['text']
+                'content': tweet['text'],
+                'entities': tweet['entities']
             }

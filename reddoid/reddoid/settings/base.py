@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'home',
     'sources',
+    'entities',
     'django.contrib.admin',
 )
 
