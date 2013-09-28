@@ -1,4 +1,4 @@
-TEST_APP=sources
+TEST_APP=sources home
 
 run:
 	reddoid/manage.py runserver --settings=reddoid.settings.local

@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'social.apps.django_app.default',
-    'reddoid',
+    'home',
     'sources',
     'django.contrib.admin',
 )

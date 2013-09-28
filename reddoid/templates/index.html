@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<header>
 <a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Twitter</a></li>
+</header>
+
+<div class="content">
+    <div class="pure-g">
+        <div class="pure-u-5-6" class="js-posts">
+        </div>
+        <div class="pure-u-1-6">
+            <div class="sidebar">
+                <a href="#" class="js-prev-day"></a>
+                <a href="#" class="js-next-day"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script>
+    jQuery(function ($) {
+        var reddoid = {};
+        if (this.reddoid !== undefined) {
+            reddoid = this.reddoid;
+        } else {
+            this.reddoid = reddoid;
+        }
+        reddoid.vars = {
+            'postsUrl': '{% url "posts" %}',
+        }
+    });
+    </script>
+    reddoid.home.init();
+});
+    <script type="text/javascript" src="/static/js/home.js" charset="utf-8"></script>
 {% endblock %}
