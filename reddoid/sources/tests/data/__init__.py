@@ -1,0 +1,2 @@
+from google import GOOGLE_PLUS_TEST_FEED
+from twitter import TWITTER_TEST_FEED
