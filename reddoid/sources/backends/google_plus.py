@@ -5,9 +5,6 @@ from django.conf import settings
 from .base import BaseSource
 
 
-# TODO(nanvel): move it to settings or set in ENV var
-
-
 
 class GooglePlusSource(BaseSource):
 
