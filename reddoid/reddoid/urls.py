@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from home.views import HomeView, PostsView, VoteView
-from entities.views import LinksHtmlView, LinksAjaxView
+from entities.views import LinksHtmlView, LinksAjaxView, ImagesView, ImagesAjaxView
 from sources.views import SourcesView
 
 
@@ -20,6 +20,8 @@ urlpatterns = patterns(
             HomeView.as_view(), name='feed'),
     url(r'^posts/$', PostsView.as_view(), name='posts'),
     url(r'^json/links/$', LinksAjaxView.as_view(), name='json-links'),
+    url(r'^images/$', ImagesView.as_view(), name='images'),
+    url(r'^json/images/$', ImagesAjaxView.as_view(), name='json-images'),
     url(r'^vote/$', VoteView.as_view(), name='vote'),
     url(r'^sources/$', SourcesView.as_view(), name='sources')
 )

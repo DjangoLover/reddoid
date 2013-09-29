@@ -56,3 +56,15 @@ Navigate to `admin <http://djangistnews.herokuapp.com/admin/sources/source/>`__ 
 The format of URLs is a what points to the person. For example, https://twitter.com/dudarev or 
 https://plus.google.com/108114175145093679567/posts.
 
+Scheduled jobs
+-----------------
+
+On Heroku you may use `Scheduler <https://scheduler.heroku.com/dashboard>`__ to run regular tasks::
+
+    heroku addons:add scheduler
+    heroku addons:open scheduler
+
+Add there management commands as shown below::
+
+    reddoid/manage.py load_posts
+    reddoid/manage.py load_link_titles

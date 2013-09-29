@@ -43,3 +43,6 @@ progress.db
 reddoid/reddoid/settings/twitter.py
 reddoid/reddoid/settings/google_plus.py
 config_heroku.sh
+
+# Mac stuff
+.DS_Store
