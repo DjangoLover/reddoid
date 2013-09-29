@@ -32,6 +32,9 @@ class Image(models.Model):
     date = models.DateField()
     votes_count = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ('-votes_count',)
+
     def __unicode__(self):
         return self.url
 
