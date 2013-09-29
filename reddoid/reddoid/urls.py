@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from home.views import HomeView, PostsView, VoteView
+from home.views import HomeView, PostsView, VoteView, VoteImageView
 from entities.views import LinksHtmlView, LinksAjaxView, ImagesView, ImagesAjaxView
 from sources.views import SourcesView
 
@@ -23,6 +23,7 @@ urlpatterns = patterns(
     url(r'^images/$', ImagesView.as_view(), name='images'),
     url(r'^json/images/$', ImagesAjaxView.as_view(), name='json-images'),
     url(r'^vote/$', VoteView.as_view(), name='vote'),
+    url(r'^vote/image/$', VoteImageView.as_view(), name='vote-image'),
     url(r'^sources/$', SourcesView.as_view(), name='sources')
 )
 

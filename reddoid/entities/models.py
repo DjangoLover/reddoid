@@ -35,6 +35,10 @@ class Image(models.Model):
     def __unicode__(self):
         return self.url
 
+    def get_votes_count(self):
+        return self.votes.aggregate(sum_votes=models.Sum('value'))['sum_votes'] or 0
+
+
 
 class ImagePost(models.Model):
     image = models.ForeignKey(Image)

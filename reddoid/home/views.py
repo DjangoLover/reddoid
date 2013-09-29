@@ -8,8 +8,8 @@ from django.utils import timezone, simplejson
 
 
 from sources.models import Post
-from entities.models import Link
-from votes.models import LinkVote
+from entities.models import Link, Image
+from votes.models import LinkVote, ImageVote
 
 
 class AjaxView(View):
@@ -68,6 +68,29 @@ class VoteView(AjaxView):
         except:
             return self.render_to_response({'success': False})
         return self.render_to_response({'success': True, 'vote': lv.link.votes_count})
+
+
+class VoteImageView(VoteView):
+
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            raise Http404
+        try:
+            lv, created = ImageVote.objects.get_or_create(
+                        user=request.user,
+                        image=Image.objects.get(url=request.POST.get('entiti')),
+                        defaults={'value': int(request.POST.get('val'))})
+            lv.value = int(request.POST.get('val'))
+            lv.save()
+            image = lv.image
+            image.votes_count = image.get_votes_count()
+            image.save()
+        except Exception, e:
+            # print e  # -- for debug
+            return self.render_to_response({'success': False})
+        return self.render_to_response({'success': True, 'vote': lv.image.votes_count})
 
 
 class HomeView(TemplateView):
