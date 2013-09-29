@@ -18,7 +18,7 @@ jQuery(function ($) {
             $(document).on('click', '.votes a', function() {
                 var val = parseInt($(this).text());
                 var vote_ind = $(this).parent().find('span');
-                var entiti = $(this).parent().parent().find('.entiti').html();
+                var entiti = $(this).parent().parent().find('.entiti > a').attr('href');
                 $.ajax({
                     url: $('.js-posts').data('vote-url'),
                     dataType: 'json',
