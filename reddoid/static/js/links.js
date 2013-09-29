@@ -35,7 +35,7 @@ jQuery(function ($) {
             });
         },
         build_post:function(link) {
-            return '<div class="post"><div class="entiti">' + link['url'] + '</div><div class="votes"> <a href="#">-1</a> (<span>' + link['votes'] +'</span>) <a href="#">+1</a> <a href="#">+2</a></div></div>'
+            return '<div class="post"><div class="entiti"><a href="' + link['url'] + '">' + link['title'] + '</a></div><div class="votes"> <a href="#">-1</a> (<span>' + link['votes'] +'</span>) <a href="#">+1</a> <a href="#">+2</a></div></div>'
         },
         next_page:function() {
             if(reddoid.home.busy) return;

@@ -71,5 +71,9 @@ class LinksAjaxView(AjaxView):
             entities = paginator.page(1)
         except EmptyPage:
             entities = []
-        links = [{'url': e.url, 'votes': e.votes_count} for e in entities]
+        links = [{
+            'url': e.url,
+            'votes': e.votes_count,
+            'title': e.title,
+        } for e in entities]
         return self.render_to_response({'entities': links})
