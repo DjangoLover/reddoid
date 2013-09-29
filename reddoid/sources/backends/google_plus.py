@@ -30,4 +30,4 @@ class GooglePlusSource(BaseSource):
                     'id': post['id'],
                     'content': post['object']['content'],
                     'title': post['title'],
-                    'attachments': post['object'].get('attachements', [])}
+                    'attachments': post['object'].get('attachments', {})}
