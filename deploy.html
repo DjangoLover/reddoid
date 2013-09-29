@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Deploy on Heroku &mdash; reddoid 0.02 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.02',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="reddoid 0.02 documentation" href="index.html" />
+    <link rel="next" title="Local development" href="development.html" />
+    <link rel="prev" title="About" href="about.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="development.html" title="Local development"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="about.html" title="About"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">reddoid 0.02 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="deploy-on-heroku">
+<h1>Deploy on <a class="reference external" href="https://www.heroku.com/">Heroku</a><a class="headerlink" href="#deploy-on-heroku" title="Permalink to this headline">¶</a></h1>
+<p>Clone the repository:</p>
+<div class="highlight-python"><pre>git clone https://github.com/dudarev/reddoid.git
+cd reddoid</pre>
+</div>
+<p>Create a new Heroku app and choose the name you&#8217;d like:</p>
+<div class="highlight-python"><pre>heroku create
+heroku apps:rename newname</pre>
+</div>
+<p>Set up the database (for more details see <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-postgresql">Heroku documentation</a>):</p>
+<div class="highlight-python"><pre>heroku addons:add heroku-postgresql:dev
+heroku pg:promote YOUR_DATABSE_URL (generated and shown during previous step)</pre>
+</div>
+<p>Add necessary settings to environment variables:</p>
+<div class="highlight-python"><pre>heroku config:add PYTHONPATH=/reddoid
+heroku config:add DJANGO_SETTINGS_MODULE=reddoid.settings.heroku</pre>
+</div>
+<p>Set up an app at <a class="reference external" href="https://dev.twitter.com/apps/new">Twitter developers page</a>.
+Specify the following parameters there:
+<tt class="docutils literal"><span class="pre">WEBSITE</span> <span class="pre">URL:</span> <span class="pre">http://your-app-name.herokuapp.com/</span></tt>
+and <tt class="docutils literal"><span class="pre">REDIRECT</span> <span class="pre">URI:</span> <span class="pre">http://your-app-name.herokuapp.com/social/complete/twitter</span></tt>.
+It&#8217;s better to select &#8220;Allow this application to be used to Sign in with Twitter&#8221;,
+so that users do not have to confirm login every time.
+Click button create access token, reload the page and get your access tokens:</p>
+<div class="highlight-python"><pre>heroku config:set SOCIAL_AUTH_TWITTER_KEY=YOUR_SOCIAL_AUTH_TWITTER_KEY
+heroku config:set SOCIAL_AUTH_TWITTER_SECRET=YOUR_SOCIAL_AUTH_TWITTER_SECRET
+heroku config:set TWITTER_ACCESS_TOKEN=YOUR_TWITTER_ACCESS_TOKEN
+heroku config:set TWITTER_ACCESS_TOKEN_SECRET=YOUR_TWITTER_ACCESS_TOKEN_SECRET</pre>
+</div>
+<p>Push code to heroku:</p>
+<div class="highlight-python"><pre>git push heroku master</pre>
+</div>
+<p>Sync the database:</p>
+<div class="highlight-python"><pre>heroku run reddoid/manage.py syncdb
+heroku run reddoid/manage.py migrate</pre>
+</div>
+<p>(This commands are saved in <cite>Makefile</cite> targets <cite>heroku_syncdb</cite> and <cite>heroku_migrate</cite>.)
+Create admin user that you will use while you are doit this.</p>
+<p>You may now launch the application:</p>
+<div class="highlight-python"><pre>heroku open</pre>
+</div>
+<p>Navigate to <a class="reference external" href="http://djangistnews.herokuapp.com/admin/sources/source/">admin</a> and add some sources.
+The format of URLs is a what points to the person. For example, <a class="reference external" href="https://twitter.com/dudarev">https://twitter.com/dudarev</a> or
+<a class="reference external" href="https://plus.google.com/108114175145093679567/posts">https://plus.google.com/108114175145093679567/posts</a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="about.html"
+                        title="previous chapter">About</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="development.html"
+                        title="next chapter">Local development</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/deploy.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="development.html" title="Local development"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="about.html" title="About"
+             >previous</a> |</li>
+        <li><a href="index.html">reddoid 0.02 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Artem Dudarev.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

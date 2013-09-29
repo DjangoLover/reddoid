@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About &mdash; reddoid 0.02 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.02',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="#" />
+    <link rel="top" title="reddoid 0.02 documentation" href="index.html" />
+    <link rel="next" title="Deploy on Heroku" href="deploy.html" />
+    <link rel="prev" title="Welcome to reddoid’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deploy.html" title="Deploy on Heroku"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to reddoid’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">reddoid 0.02 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<p>Reddoid is a mixture of <a class="reference external" href="http://en.wikipedia.org/wiki/Reddit">Reddit</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/Planet_%28software%29">Planet</a> social media patterns.</p>
+<p>Moderators may add multiple social accounts. Posts from them are shown. Anybody may vote on any post. Posts with most votes get to the main page for a day. Machine learning algorthms are used to predict popular posts.</p>
+<p>Posts from multiple social services can be shown: Twitter, Instagram, Facebook, Google+, Github etc. RSS/Atom feeds are also supported.</p>
+</div>
+<div class="section" id="user-stories-not-everything-is-implemented">
+<h1>User stories (not everything is implemented)<a class="headerlink" href="#user-stories-not-everything-is-implemented" title="Permalink to this headline">¶</a></h1>
+<p>On the home page a user sees links mentioned by a selected group of users in various social networks during the last day. There are navigation links to Images, Videos, Events, Code interactions, Raw posts. Pagination is within a day and to other days. A link where all sources can be seen on one page.</p>
+<div class="section" id="adding-people-sources">
+<h2>Adding people/sources<a class="headerlink" href="#adding-people-sources" title="Permalink to this headline">¶</a></h2>
+<p>Moderators may add a source to the group by specifying URL to a profile (Twitter, Google+, Facebook, Vkontakte, Instagram, Flickr, Youtube, Vimeo, Github, Bitbucket). Several sources may be linked to a person, for instance a person may have Twitter, Google+ and Instagram accounts.</p>
+</div>
+<div class="section" id="syncing-with-native-lists">
+<h2>Syncing with native lists<a class="headerlink" href="#syncing-with-native-lists" title="Permalink to this headline">¶</a></h2>
+<p>All sources are synced with native implementation of lists for a given service (for now only for Twitter lists and Google+ circles). For example, all sources that are added to the service are also added to a list on Twitter, if somebody is removed from the service, he is removed from the list. Same is true if a source is added to the list on Twitter, then it appears on the service.</p>
+</div>
+<div class="section" id="voting">
+<h2>Voting<a class="headerlink" href="#voting" title="Permalink to this headline">¶</a></h2>
+<p>One may vote from -1 to +2 (see <a class="reference external" href="http://donetskogram.com/">http://donetskogram.com/</a>). Posts are ordered by score. Votes from different users have different weight and contribute to score differently. Actions on posts in native network (likes, favorites, re-posts etc.) increase their scores too.</p>
+</div>
+<div class="section" id="score-prediction">
+<h2>Score prediction<a class="headerlink" href="#score-prediction" title="Permalink to this headline">¶</a></h2>
+<p>See how it’s done in <a class="reference external" href="https://github.com/dudarev/photoplanet/blob/master/photoplanet/photoplanet/models.py#L26">photoplanet</a> .</p>
+</div>
+<div class="section" id="entities">
+<h2>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Links (Similar to Hacker News. Elements of interface: title, domain, score, time posted)</li>
+<li>Images (Similar to <a class="reference external" href="http://donetskogram.com/">http://donetskogram.com/</a>. In addition to Instagram include Flickr, image links from Twitter. Think how to handle Google+ images)</li>
+<li>Video (Youtube and Vimeo)</li>
+<li>Code (Bitbucket and Github. Forking, committing etc.)</li>
+<li>Events (Events can be added manually)</li>
+<li>Feed of everything</li>
+<li>Just everything together</li>
+<li>Weekly .A text that can be collaboratively edited. Posts may be added to weekly with some easy interface. Integration with Mailchimp.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="inspirations">
+<h2>Inspirations<a class="headerlink" href="#inspirations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.reddit.com">http://www.reddit.com</a></li>
+<li><a class="reference external" href="http://habrahabr.ru/">http://habrahabr.ru/</a></li>
+<li><a class="reference external" href="http://planet.python.org/">http://planet.python.org/</a></li>
+<li><a class="reference external" href="http://www.planetplanet.org/">http://www.planetplanet.org/</a></li>
+<li><a class="reference external" href="http://donetskogram.com/">http://donetskogram.com/</a></li>
+<li><a class="reference external" href="https://news.ycombinator.com/">https://news.ycombinator.com/</a></li>
+<li><a class="reference external" href="http://hckrnews.com/">http://hckrnews.com/</a></li>
+<li><a class="reference external" href="http://www.inbound.org/">http://www.inbound.org/</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">About</a></li>
+<li><a class="reference internal" href="#user-stories-not-everything-is-implemented">User stories (not everything is implemented)</a><ul>
+<li><a class="reference internal" href="#adding-people-sources">Adding people/sources</a></li>
+<li><a class="reference internal" href="#syncing-with-native-lists">Syncing with native lists</a></li>
+<li><a class="reference internal" href="#voting">Voting</a></li>
+<li><a class="reference internal" href="#score-prediction">Score prediction</a></li>
+<li><a class="reference internal" href="#entities">Entities</a></li>
+<li><a class="reference internal" href="#inspirations">Inspirations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to reddoid&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="deploy.html"
+                        title="next chapter">Deploy on Heroku</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/about.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="deploy.html" title="Deploy on Heroku"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to reddoid’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">reddoid 0.02 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Artem Dudarev.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
