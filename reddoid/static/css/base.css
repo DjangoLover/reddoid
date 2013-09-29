@@ -60,3 +60,11 @@
     position: absolute;
     z-index: 99;
 }
+
+.footer {
+    font-size: 80%;
+    border-top: 1px solid #eee;
+    padding: 0.5em 1.1429em;
+    line-height: 1.6em;
+    color: #888;
+}
