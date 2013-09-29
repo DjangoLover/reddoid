@@ -9,6 +9,8 @@ jQuery(function ($) {
         page: 1,
         busy: false,
         init:function () {
+            reddoid.home.authenticated = $('.js-posts').data('authenticated');
+            console.log(reddoid.home.authenticated)
             $(window).scroll(function() {
                 if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
                     reddoid.home.next_page();
@@ -16,6 +18,10 @@ jQuery(function ($) {
             });
             reddoid.home.next_page();
             $(document).on('click', '.votes a', function() {
+                if (!reddoid.home.authenticated) {
+                    $(this).addClass('unauthenticated').attr('title', 'Please login first');
+                    return false;
+                }
                 var val = parseInt($(this).text());
                 var vote_ind = $(this).parent().find('span');
                 var entiti = $(this).parent().parent().find('.entiti > a').attr('href');
@@ -26,7 +32,6 @@ jQuery(function ($) {
                     type: 'POST',
                     success: function (data) {
                         if(data['success']) {
-                            console.log(vote_ind);
                             vote_ind.text(data['vote']);
                         }
                     },

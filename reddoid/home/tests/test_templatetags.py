@@ -10,7 +10,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_date_link(self):
         date = timezone.now()
-        link = date_link(date)
+        link = date_link(date, 'links')
         self.assertIn(str((date + datetime.timedelta(days=1)).day), link)
-        link = date_link(date, is_next=False)
+        link = date_link(date, 'links', is_next=False)
         self.assertIn(str((date - datetime.timedelta(days=1)).day), link)

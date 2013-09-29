@@ -14,12 +14,12 @@
 </div>
 
 <div class="content">
-    <div class="posts js-posts" data-posts-url="{% url 'posts' %}" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}">
+    <div class="posts js-posts" data-posts-url="{% url 'posts' %}" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}"{% if authenticated %} data-authenticated="true"{% endif %}>
     </div>
 </div>
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
-    <script type="text/javascript" src="/static/js/home.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/home.js?v=1" charset="utf-8"></script>
 {% endblock %}
