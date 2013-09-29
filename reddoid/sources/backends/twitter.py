@@ -16,7 +16,11 @@ class TwitterSource(BaseSource):
     def fetch(self):
         APP_KEY = settings.SOCIAL_AUTH_TWITTER_KEY
         APP_SECRET = settings.SOCIAL_AUTH_TWITTER_SECRET
-        twitter = Twython(APP_KEY, APP_SECRET, settings.ACCESS_TOKEN, settings.ACCESS_TOKEN_SECRET)
+        twitter = Twython(
+            APP_KEY,
+            APP_SECRET,
+            settings.TWITTER_ACCESS_TOKEN,
+            settings.TWITTER_ACCESS_TOKEN_SECRET)
         if self.uid:
             tweets = twitter.get_user_timeline(user_id=self.uid)
         else:
