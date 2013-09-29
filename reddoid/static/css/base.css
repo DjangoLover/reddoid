@@ -11,36 +11,15 @@
 }
 .post {
     background: #eee;
-    padding: 5px 5px 5px 20px;
+    padding: 5px 10px;
     margin-bottom: 5px;
+    margin-right: 60px;
 }
-.sidebar {
-    padding: 20px;
-    position: fixed;
-    right: 0;
-}
-.vote-button {
-    width: 15px;
-    height: 15px;
-    position: relative;
-    left: -20px;
+.votes {
     display: inline-block;
+    float: right;
+    font-family: "Lucida Console", Monaco, monospace;
 }
-.vote-button span {
-    position: absolute;
-    top: 7px;
-    left: 7px;
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    cursor: pointer;
-}
-.vote-button span.up {
-    top: 0;
-    border-bottom: 7px solid #222;
-}
-.vote-button span.down {
-    top: 12px;
-    border-top: 7px solid #222;
+.entiti {
+    display: inline-block;
 }

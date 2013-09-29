@@ -1,6 +1,6 @@
 import datetime
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.views.generic.base import TemplateView, View
@@ -8,6 +8,8 @@ from django.utils import timezone, simplejson
 
 
 from sources.models import Post
+from entities.models import Link
+from votes.models import LinkVote
 
 
 class AjaxView(View):
@@ -51,7 +53,21 @@ class VoteView(AjaxView):
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
-        return self.render_to_response({})
+        if not request.user.is_authenticated():
+            raise Http404
+        try:
+            lv, created = LinkVote.objects.get_or_create(
+                        user=request.user,
+                        link=Link.objects.get(url=request.POST.get('entiti')),
+                        defaults={'value': int(request.POST.get('val'))})
+            lv.value = int(request.POST.get('val'))
+            lv.save()
+            link = lv.link
+            link.votes_count = link.get_votes_count()
+            link.save()
+        except:
+            return self.render_to_response({'success': False})
+        return self.render_to_response({'success': True, 'vote': lv.link.votes_count})
 
 
 class HomeView(TemplateView):

@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'sources',
     'entities',
     'reddoid',
+    'votes',
     'django.contrib.admin',
 )
 

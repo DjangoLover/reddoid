@@ -15,15 +15,27 @@ jQuery(function ($) {
                 }
             });
             reddoid.home.next_page();
-            $(document).on('click', '.vote-button .up', function() {
-                console.log('up');
-            });
-            $(document).on('click', '.vote-button .down', function() {
-                console.log('down');
+            $(document).on('click', '.votes a', function() {
+                var val = parseInt($(this).text());
+                var vote_ind = $(this).parent().find('span');
+                var entiti = $(this).parent().parent().find('.entiti').html();
+                $.ajax({
+                    url: $('.js-posts').data('vote-url'),
+                    dataType: 'json',
+                    data: {val: val, csrfmiddlewaretoken: $('.js-posts').data('csrf'), entiti: entiti},
+                    type: 'POST',
+                    success: function (data) {
+                        if(data['success']) {
+                            console.log(vote_ind);
+                            vote_ind.text(data['vote']);
+                        }
+                    },
+                });
+                return false
             });
         },
         build_post:function(link) {
-            return '<div class="post"><div class="vote-button"><span class="up"></span><span class="down"></span></div>' + link['url'] + '</div>'
+            return '<div class="post"><div class="entiti">' + link['url'] + '</div><div class="votes"> <a href="#">-1</a> (<span>' + link['votes'] +'</span>) <a href="#">+1</a> <a href="#">+2</a></div></div>'
         },
         next_page:function() {
             if(reddoid.home.busy) return;
