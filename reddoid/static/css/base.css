@@ -20,6 +20,43 @@
     float: right;
     font-family: "Lucida Console", Monaco, monospace;
 }
+.votes a {
+    position: relative;
+    margin-top: 2px;
+}
 .entiti {
     display: inline-block;
+}
+
+// unauthorized tooltip
+.unauthenticated {
+    display: inline;
+    position: relative;
+}
+.unauthenticated:hover:after {
+    background: #F8F8C1;
+    border: 1px solid #996;
+    border-radius: 2px;
+    bottom: 25px;
+    color: #444444;
+    content: attr(title);
+    display: block;
+    padding: 3px 5px;
+    position: absolute;
+    right: -10px;
+    white-space: nowrap;
+    font-size: 13px;
+    z-index: 98;
+}
+.unauthenticated:hover:before {
+    border: solid;
+    border-color: #F8F8C1 transparent;
+    border-color: #996 transparent;
+    border-width: 5px 5px 0 5px;
+    bottom: 20px;
+    content: "";
+    display: block;
+    left: 5px;
+    position: absolute;
+    z-index: 99;
 }

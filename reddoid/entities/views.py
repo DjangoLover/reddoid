@@ -39,7 +39,9 @@ class LinksHtmlView(TemplateView):
                 day=int(kwargs['day']))
         except (TypeError, ValueError, KeyError):
             date = datetime.datetime.now()
-        return self.render_to_response({'date': date})
+        return self.render_to_response({
+                'date': date,
+                'authenticated': request.user.is_authenticated()})
 
 
 class LinksAjaxView(AjaxView):

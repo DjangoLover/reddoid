@@ -36,4 +36,5 @@ class HomeViewsTestCase(TestCase):
         response = self.client.get(reverse('vote'))
         self.assertEqual(response.status_code, 405)
         response = self.client.post(reverse('vote'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
+        # TODO: extend test
