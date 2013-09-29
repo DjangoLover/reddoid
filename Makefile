@@ -17,3 +17,13 @@ test:
 
 manage:
 	reddoid/manage.py $(CMD) --settings=reddoid.settings.local
+
+
+heroku_syncdb:
+	heroku run reddoid/manage.py syncdb
+
+heroku_migrate:
+	heroku run reddoid/manage.py migrate
+
+heroku_load_posts:
+	heroku run reddoid/manage.py load_posts
