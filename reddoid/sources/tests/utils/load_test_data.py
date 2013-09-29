@@ -16,7 +16,11 @@ from django.conf import settings
 
 APP_KEY = settings.SOCIAL_AUTH_TWITTER_KEY
 APP_SECRET = settings.SOCIAL_AUTH_TWITTER_SECRET
-twitter = Twython(APP_KEY, APP_SECRET, settings.ACCESS_TOKEN, settings.ACCESS_TOKEN_SECRET)
+twitter = Twython(
+    APP_KEY,
+    APP_SECRET,
+    settings.TWITTER_ACCESS_TOKEN,
+    settings.TWITTER_ACCESS_TOKEN_SECRET)
 statuses = twitter.get_user_timeline(screen_name='dudarev_ru')
 with open('factories_twitter.py', 'w') as f:
     json.dump(str(statuses), f)
