@@ -23,6 +23,7 @@ class ImagePostAdmin(admin.ModelAdmin):
 
 
 class SourceAdmin(admin.ModelAdmin):
+    list_display = ('url', )
     pass
 
 
