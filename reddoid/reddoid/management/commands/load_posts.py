@@ -11,6 +11,7 @@ from sources.models import Source, Post
 from sources.backends import GooglePlusSource, TwitterSource
 
 IMAGE_LINK_STOPWORDS = ['instagram.com', 'pic.twitter.com']
+URL_MAX_LENGTH = 200
 
 
 class Command(BaseCommand):
@@ -45,7 +46,7 @@ class Command(BaseCommand):
                     for url in urls:
                         expanded_url = url.get('expanded_url', None)
                         display_url = url.get('display_url', None)
-                        if not expanded_url or not display_url:
+                        if not expanded_url or not display_url or len(expanded_url) > URL_MAX_LENGTH:
                             continue
                         if any([w in expanded_url for w in IMAGE_LINK_STOPWORDS]):
                             print 'this is image url: ', expanded_url
@@ -66,7 +67,7 @@ class Command(BaseCommand):
                         display_url = tweet.get('text', None)
                         if not display_url:
                             display_url = img.get('display_url', None)
-                        if not expanded_url or not display_url:
+                        if not expanded_url or not display_url or len(expanded_url) > URL_MAX_LENGTH:
                             continue
                         image, is_created = Image.objects.get_or_create(
                             url=expanded_url,
@@ -96,7 +97,7 @@ class Command(BaseCommand):
                         if 'url' in ent:
                             expanded_url = ent.get('url', None)
                             display_url = act.get('title', None)
-                            if expanded_url and display_url and expanded_url < 200:
+                            if expanded_url and display_url and len(expanded_url) < URL_MAX_LENGTH:
                                 # self.stdout.write(expanded_url)
                                 link, is_created = Link.objects.get_or_create(
                                     url=expanded_url,
@@ -109,7 +110,7 @@ class Command(BaseCommand):
                             continue
                         expanded_url = ent['fullImage'].get('url', None)
                         display_url = act.get('title', [])[:255]
-                        if len(expanded_url) >= 190:
+                        if len(expanded_url) > URL_MAX_LENGTH:
                             continue
                         if not display_url:
                             display_url = expanded_url
