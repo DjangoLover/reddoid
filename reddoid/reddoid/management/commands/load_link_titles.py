@@ -14,7 +14,10 @@ class Command(BaseCommand):
     @classmethod
     def _load_title(self, url):
         print url
-        soup = BeautifulSoup(urllib2.urlopen(url))
+        try:
+            soup = BeautifulSoup(urllib2.urlopen(url))
+        except:
+            return url
         if not soup.title:
             return url
         else:
