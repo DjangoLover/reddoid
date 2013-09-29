@@ -27,3 +27,6 @@ heroku_migrate:
 
 heroku_load_posts:
 	heroku run reddoid/manage.py load_posts
+
+heroku_load_link_titles:
+	heroku run reddoid/manage.py load_link_titles
