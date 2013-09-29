@@ -9,8 +9,8 @@ Moderators may add multiple social accounts. Posts from them are shown. Anybody 
 
 Posts from multiple social services can be shown: Twitter, Instagram, Facebook, Google+, Github etc. RSS/Atom feeds are also supported.
 
-User stories
-============
+User stories (not everything is implemented)
+============================================
 
 On the home page a user sees links mentioned by a selected group of users in various social networks during the last day. There are navigation links to Images, Videos, Events, Code interactions, Raw posts. Pagination is within a day and to other days. A link where all sources can be seen on one page.
 
