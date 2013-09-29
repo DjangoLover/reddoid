@@ -1,3 +1,8 @@
+.. reddoid project deploy
+
+Deploy on `Heroku <https://www.heroku.com/>`__
+==============================================
+
 Clone the repository::
 
     git clone https://github.com/dudarev/reddoid.git
@@ -50,3 +55,4 @@ You may now launch the application::
 Navigate to `admin <http://djangistnews.herokuapp.com/admin/sources/source/>`__ and add some sources. 
 The format of URLs is a what points to the person. For example, https://twitter.com/dudarev or 
 https://plus.google.com/108114175145093679567/posts.
+
