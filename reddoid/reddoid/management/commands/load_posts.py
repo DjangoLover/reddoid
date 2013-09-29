@@ -24,6 +24,9 @@ class Command(BaseCommand):
                 for tweet in source.fetch():
                     self.stdout.write(tweet['content'])
                     print tweet
+                    post_created_at = datetime.strptime(
+                        tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y').replace(
+                            tzinfo=utc)
                     post, is_created = Post.objects.get_or_create(
                         pid=tweet['id'],
                         created_time=datetime.strptime(
@@ -45,9 +48,10 @@ class Command(BaseCommand):
                         self.stdout.write(expanded_url)
                         link, is_created = Link.objects.get_or_create(
                             url=expanded_url,
+                            date=post_created_at.date(),
                             defaults={
                                 'title': display_url,
-                                'date': date.today()})
+                            })
                         LinkPost.objects.get_or_create(
                             link=link, post=post)
                     images = entities.get('media', [])
