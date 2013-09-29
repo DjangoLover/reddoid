@@ -42,8 +42,16 @@ jQuery(function ($) {
         build_post:function(link) {
             return '<div class="post"><div class="entiti"><a href="' + link['url'] + '">' + link['title'] + '</a></div><div class="votes"> <a href="#">-1</a> (<span>' + link['votes'] +'</span>) <a href="#">+1</a> <a href="#">+2</a></div></div>'
         },
+        build_post_image:function(link) {
+            return '<div class="post"><div class="entiti"><a href="' + link['url'] + '">' +
+                '<img src="' + link['url'] + '" width="50" height="50"> ' + link['url'] + '</a></div><div class="votes"> <a href="#">-1</a> (<span>' + link['votes'] +'</span>) <a href="#">+1</a> <a href="#">+2</a></div></div>'
+        },
         next_page:function() {
             if(reddoid.home.busy) return;
+            var build_post = reddoid.home.build_post;
+            switch ($('.js-posts').data('format')) {
+                case 'image': build_post = reddoid.home.build_post_image;
+            };
             $.ajax({
                 url: $('.js-posts').data('links-url'),
                 dataType: 'json',
@@ -52,7 +60,7 @@ jQuery(function ($) {
                 success: function (data) {
                     if(data['entities'].length) {
                         for(var i=0; i<data['entities'].length; i++) {
-                            $('.js-posts').append(reddoid.home.build_post(data['entities'][i]));
+                            $('.js-posts').append(build_post(data['entities'][i]));
                         };
                     }
                     reddoid.home.page += 1;

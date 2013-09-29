@@ -18,7 +18,7 @@
 </div>
 
 <div class="content">
-    <div class="posts js-posts" data-links-url="{% url 'json-images' %}" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}">
+    <div class="posts js-posts" data-links-url="{% url 'json-images' %}" data-format="image" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}">
     </div>
     <!-- <ul>
         {% for image in object_list %}

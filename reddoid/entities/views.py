@@ -111,7 +111,7 @@ class ImagesAjaxView(AjaxView):
         links = [{
             'url': e.url,
             # 'votes': e.votes_count,
-            # 'title': e.title,
+            'title': e.title,
         } for e in entities]
         return self.render_to_response({'entities': links})
 
