@@ -99,7 +99,7 @@ class ImagesAjaxView(AjaxView):
         except (ValueError, TypeError):
             date = datetime.datetime.now()
         paginator = Paginator(
-            Image.objects.all(),
+            Image.objects.all().filter(date=date),
             25,
             orphans=10)
         try:

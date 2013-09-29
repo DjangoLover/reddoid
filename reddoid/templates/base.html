@@ -11,6 +11,13 @@
     <body>
         {% block content %}
         {% endblock %}
+        <div class="footer">
+          <a href="{% url "sources" %}">links sources</a> | 
+          made during <a href="http://djangodash.com/">Django Dash</a> 2013 by 
+          <a href="http://github.com/dudarev">@dudarev</a>,
+          <a href="https://github.com/nanvel">@nanvel</a>,
+          <a href="https://twitter.com/lisitsky">@lisitsky</a>
+        </div>
         {% block js %}
         <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js" charset="utf-8"></script>
         {% endblock %}
