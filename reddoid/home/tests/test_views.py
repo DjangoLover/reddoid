@@ -26,3 +26,8 @@ class HomeViewsTestCase(TestCase):
         self.assertEqual(
                 len(simplejson.loads(response.content)['posts']),
                 1)
+        response = self.client.get(reverse('posts'), {'date': '1000-10-10'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+                len(simplejson.loads(response.content)['posts']),
+                0)

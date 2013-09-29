@@ -31,15 +31,17 @@ class PostsView(AjaxView):
         except (ValueError, TypeError):
             date = datetime.datetime.now()
         paginator = Paginator(
-                Post.objects.filter(created_time__gte=date.replace(
-                        tzinfo=timezone.utc)),
+                Post.objects.filter(
+                        created_time__gte=date.replace(tzinfo=timezone.utc),
+                        created_time__lt=(
+                                date + datetime.timedelta(days=1)).replace(tzinfo=timezone.utc)),
                 25, orphans=10)
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
             posts = paginator.page(1)
         except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
+            pass
         posts = [{'content': p.content} for p in posts]
         return self.render_to_response({'posts': posts})
 
