@@ -41,6 +41,7 @@ class LinksHtmlView(TemplateView):
             date = datetime.datetime.now()
         return self.render_to_response({
                 'date': date,
+                'entities_name': 'links',
                 'authenticated': request.user.is_authenticated()})
 
 
@@ -86,7 +87,12 @@ class ImagesView(TemplateView):
             date = datetime.datetime.now()
         # return date
         # date = datetime.datetime.now()
-        return self.render_to_response({'date': date})
+        return self.render_to_response(
+            {
+                'date': date,
+                'entities_name': 'images',
+                'authenticated': request.user.is_authenticated(),
+            })
 
 
 class ImagesAjaxView(AjaxView):

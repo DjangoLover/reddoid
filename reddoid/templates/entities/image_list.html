@@ -1,26 +1,9 @@
 {% extends 'base.html' %}
-{% load home_tags %}
 
 {% block content %}
-<div class="menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-    <a href="{% url 'home' %}" class="pure-menu-heading">REDDOID</a>
-    <ul>
-         {% if user.is_authenticated %}
-         <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
-         {% else %}
-         <li><a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Login with Twitter</a></li>
-         {% endif %}
-    </ul>
-    <ul class="right">
-        <li>{% date_link date "images" False %}</li>
-        <li>{% date_link date "images" True %}</li>
-    </ul>
-</div>
-
 <div class="content">
     <div class="posts js-posts" data-links-url="{% url 'json-images' %}" data-format="image" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote-image' %}" {% if user.is_authenticated %} data-authenticated="true"{% endif %}>
     </div>
-
 </div>
 {% endblock %}
 

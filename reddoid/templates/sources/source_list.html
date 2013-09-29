@@ -2,29 +2,12 @@
 {% load home_tags %}
 
 {% block content %}
-<div class="menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-    <a href="{% url 'home' %}" class="pure-menu-heading">REDDOID</a>
-    <ul>
-         {% if user.is_authenticated %}
-         <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
-         {% else %}
-         <li><a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Login with Twitter</a></li>
-         {% endif %}
-    </ul>
-    {% comment %}
-        <ul class="right">
-            <li>{% date_link date "links" False %}</li>
-            <li>{% date_link date "links" True %}</li>
-        </ul>
-    {% endcomment %}
-</div>
-
 <div class="content">
     <!-- <div class="posts js-posts" data-links-url="{% url 'json-links' %}" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}">
     </div> -->
     <ul>
 	    {% for source in object_list %}
-	        <li>{{ source.url }}</li>
+      <li><a href="{{ source.url }}">{{ source.url }}</a></li>
 	    {% endfor %}
     </ul>
 </div>

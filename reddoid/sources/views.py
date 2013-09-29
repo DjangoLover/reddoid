@@ -1,16 +1,17 @@
 #
 # -*- coding: utf-8 -*-
+import datetime
 
-from django.http import HttpResponse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.utils import decorators
-from django.views.decorators import csrf
 from django.views.generic import ListView
-from django.views.generic.base import TemplateView, View
-from django.utils import timezone, simplejson
 
 from models import Source
 
+
 class SourcesView(ListView):
-	# template_name = 'list.html'
-	model = Source
+    model = Source
+
+    def get_context_data(self, **kwargs):
+        context = super(SourcesView, self).get_context_data(**kwargs)
+        context['date'] = datetime.datetime.now()
+        context['entities_name'] = 'links'
+        return context
