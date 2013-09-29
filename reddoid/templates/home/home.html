@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load home_tags %}
 
 {% block content %}
 <header>
@@ -10,9 +11,9 @@
         <div class="pure-u-5-6" class="js-posts">
         </div>
         <div class="pure-u-1-6">
-            <div class="sidebar">
-                <a href="#" class="js-prev-day"></a>
-                <a href="#" class="js-next-day"></a>
+            <div class="sidebar" data-posts-url="{% url 'posts' %}">
+                {% date_link date False %}
+                {% date_link date True %}
             </div>
         </div>
     </div>
@@ -21,20 +22,5 @@
 
 {% block js %}
     {{ block.super }}
-    <script>
-    jQuery(function ($) {
-        var reddoid = {};
-        if (this.reddoid !== undefined) {
-            reddoid = this.reddoid;
-        } else {
-            this.reddoid = reddoid;
-        }
-        reddoid.vars = {
-            'postsUrl': '{% url "posts" %}',
-        }
-    });
-    </script>
-    reddoid.home.init();
-});
     <script type="text/javascript" src="/static/js/home.js" charset="utf-8"></script>
 {% endblock %}

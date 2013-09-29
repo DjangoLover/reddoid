@@ -1,4 +1,8 @@
+import datetime
+
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
 from django.views.generic.base import TemplateView, View
 from django.utils import timezone, simplejson
 
@@ -12,9 +16,6 @@ class AjaxView(View):
     response_class = HttpResponse
 
     def render_to_response(self, context, **response_kwargs):
-        """
-        Returns a JSON response, transforming 'context' to make the payload.
-        """
         response_kwargs['content_type'] = 'application/json'
         return self.response_class(simplejson.dumps(context), **response_kwargs)
 
@@ -22,12 +23,35 @@ class AjaxView(View):
 class PostsView(AjaxView):
 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
+        page = request.GET.get('page')
+        try:
+            date = datetime.datetime.strptime(
+                    request.GET.get('date'),
+                    '%Y-%m-%d')
+        except (ValueError, TypeError):
+            date = datetime.datetime.now()
+        paginator = Paginator(
+                Post.objects.filter(created_time__gte=date.replace(
+                        tzinfo=timezone.utc)),
+                25, orphans=10)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        posts = [{'content': p.content} for p in posts]
         return self.render_to_response({'posts': posts})
 
 
 class HomeView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'home/home.html'
 
     def get(self, request, *args, **kwargs):
-        return self.render_to_response()
+        try:
+            date = datetime.datetime(
+                    year=int(kwargs['year']), month=int(kwargs['month']),
+                    day=int(kwargs['day']))
+        except (TypeError, ValueError, KeyError):
+            date = datetime.datetime.now()
+        return self.render_to_response({'date': date})

@@ -17,3 +17,4 @@ static==0.4
 twython==3.1.0
 wsgiref==0.1.2
 Mock==1.0.1
+factory_boy==2.2.1
