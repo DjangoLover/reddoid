@@ -4,9 +4,8 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import decorators
 from django.views.decorators import csrf
-from django.views.generic import ListView
 from django.views.generic.base import TemplateView, View
-from django.utils import timezone, simplejson
+from django.utils import simplejson
 
 from entities.models import Link
  
@@ -22,20 +21,12 @@ class EnsureCsrfCookieMixin(object):
 
 
 class AjaxView(View):
-
     http_method_names = ['get']
     response_class = HttpResponse
 
     def render_to_response(self, context, **response_kwargs):
         response_kwargs['content_type'] = 'application/json'
         return self.response_class(simplejson.dumps(context), **response_kwargs)
-
-
-class LinkListView(EnsureCsrfCookieMixin, ListView):
-    model = Link
-    queryset = Link.objects.all()
-    # TODO:(dudarev) move to settings
-    paginate_by = 100
 
 
 class LinksHtmlView(TemplateView):
@@ -62,7 +53,7 @@ class LinksAjaxView(AjaxView):
         except (ValueError, TypeError):
             date = datetime.datetime.now()
         paginator = Paginator(
-            Link.objects.all(),
+            Link.objects.all().filter(date=date).exclude(title__isnull=True),
             25,
             orphans=10)
         try:
