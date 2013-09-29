@@ -98,6 +98,17 @@ Create admin user that you will use while you are doit this.</p>
 <p>Navigate to <a class="reference external" href="http://djangistnews.herokuapp.com/admin/sources/source/">admin</a> and add some sources.
 The format of URLs is a what points to the person. For example, <a class="reference external" href="https://twitter.com/dudarev">https://twitter.com/dudarev</a> or
 <a class="reference external" href="https://plus.google.com/108114175145093679567/posts">https://plus.google.com/108114175145093679567/posts</a>.</p>
+<div class="section" id="scheduled-jobs">
+<h2>Scheduled jobs<a class="headerlink" href="#scheduled-jobs" title="Permalink to this headline">¶</a></h2>
+<p>On Heroku you may use <a class="reference external" href="https://scheduler.heroku.com/dashboard">Scheduler</a> to run regular tasks:</p>
+<div class="highlight-python"><pre>heroku addons:add scheduler
+heroku addons:open scheduler</pre>
+</div>
+<p>Add there management commands as shown below:</p>
+<div class="highlight-python"><pre>reddoid/manage.py load_posts
+reddoid/manage.py load_link_titles</pre>
+</div>
+</div>
 </div>
 
 
@@ -106,6 +117,14 @@ The format of URLs is a what points to the person. For example, <a class="refere
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Deploy on Heroku</a><ul>
+<li><a class="reference internal" href="#scheduled-jobs">Scheduled jobs</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="about.html"
                         title="previous chapter">About</a></p>
