@@ -8,9 +8,16 @@ class Link(models.Model):
     title = models.TextField(null=True)
     score = models.IntegerField(default=0)
     date = models.DateField()
+    votes_count = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ('-votes_count',)
 
     def __unicode__(self):
         return self.url
+
+    def get_votes_count(self):
+        return self.votes.aggregate(sum_votes=models.Sum('value'))['sum_votes'] or 0
 
 
 class LinkPost(models.Model):
