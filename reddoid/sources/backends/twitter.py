@@ -29,5 +29,6 @@ class TwitterSource(BaseSource):
             yield {
                 'id': tweet['id'],
                 'content': tweet['text'],
+                'created_at': tweet['created_at'],
                 'entities': tweet['entities']
             }

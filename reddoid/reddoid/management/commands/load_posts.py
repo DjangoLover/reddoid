@@ -1,7 +1,8 @@
-import datetime
+from datetime import datetime
+from datetime import date
+from django.utils.timezone import utc
 
 from django.core.management.base import BaseCommand
-from django.conf import settings
 from django.utils import timezone
 
 from entities.models import Link, LinkPost, Image, ImagePost
@@ -22,12 +23,21 @@ class Command(BaseCommand):
                 source = TwitterSource(screen_name=screen_name)
                 for tweet in source.fetch():
                     self.stdout.write(tweet['content'])
+                    print tweet
+                    post_created_at = datetime.strptime(
+                        tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y').replace(
+                            tzinfo=utc)
                     post, is_created = Post.objects.get_or_create(
                         pid=tweet['id'],
+                        created_time=datetime.strptime(
+                            tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y').replace(
+                                tzinfo=utc),
                         defaults={
-                            'content':tweet['content'],
+                            'content': tweet['content'],
                             'source_id': s.id,
-                            'created_time': timezone.now()})
+                            'created_time': datetime.strptime(
+                                tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y').replace(
+                                    tzinfo=utc)})
                     entities = tweet['entities']
                     urls = entities.get('urls', [])
                     for url in urls:
@@ -37,12 +47,13 @@ class Command(BaseCommand):
                             continue
                         self.stdout.write(expanded_url)
                         link, is_created = Link.objects.get_or_create(
-                                url=expanded_url,
-                                defaults={
-                                    'title': display_url,
-                                    'date': datetime.date.today()})
+                            url=expanded_url,
+                            date=post_created_at.date(),
+                            defaults={
+                                'title': display_url,
+                            })
                         LinkPost.objects.get_or_create(
-                                link=link, post=post)
+                            link=link, post=post)
                     images = entities.get('media', [])
                     for img in images:
                         if img['type'] != 'photo':
@@ -54,12 +65,12 @@ class Command(BaseCommand):
                         if not expanded_url or not display_url:
                             continue
                         image, is_created = Image.objects.get_or_create(
-                                url=expanded_url,
-                                defaults={
-                                    'title': display_url,
-                                    'date': datetime.date.today()})
+                            url=expanded_url,
+                            defaults={
+                                'title': display_url,
+                                'date': date.today()})
                         ImagePost.objects.get_or_create(
-                                image=image, post=post)
+                            image=image, post=post)
             elif s.uid:
                 source = GooglePlusSource(uid=s.uid)
                 counter = 0
@@ -87,7 +98,7 @@ class Command(BaseCommand):
                                     url=expanded_url,
                                     defaults={
                                         'title': display_url,
-                                        'date': datetime.date.today()})
+                                        'date': date.today()})
                                 LinkPost.objects.get_or_create(
                                     link=link, post=post)
                         # imgages
@@ -103,9 +114,9 @@ class Command(BaseCommand):
                             continue
                         self.stdout.write(expanded_url)
                         image, is_created = Image.objects.get_or_create(
-                                url=expanded_url,
-                                defaults={
-                                    'title': display_url,
-                                    'date': datetime.date.today()})
+                            url=expanded_url,
+                            defaults={
+                                'title': display_url,
+                                'date': date.today()})
                         ImagePost.objects.get_or_create(
-                                image=image, post=post)
+                            image=image, post=post)
