@@ -48,7 +48,7 @@ class Post(models.Model):
     # pid is for post id, taken from the service
     pid = models.CharField(primary_key=True, max_length=120)
     source = models.ForeignKey(Source)
-    created_time = models.DateTimeField(null=True)
+    created_time = models.DateTimeField()
     content = models.TextField()
     api_content = models.TextField()
 

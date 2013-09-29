@@ -20,10 +20,14 @@ class GooglePlusSource(BaseSource):
                     # TODO(nanvel): move maxResults to settings
                     pageToken=nextPageToken, maxResults=10,
                     key=settings.GOOGLE_PLUS_API_KEY).execute()
-            nextPageToken = activities_list['nextPageToken']
+            nextPageToken = activities_list.get('nextPageToken')
+            if not nextPageToken:
+                raise StopIteration()
             if not len(activities_list['items']):
                 raise StopIteration()
             for post in activities_list['items']:
                 yield {
                     'id': post['id'],
-                    'content': post['object']['content']}
+                    'content': post['object']['content'],
+                    'title': post['title'],
+                    'attachments': post['object'].get('attachements', [])}
