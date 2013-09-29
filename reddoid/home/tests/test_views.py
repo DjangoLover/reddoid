@@ -31,3 +31,9 @@ class HomeViewsTestCase(TestCase):
         self.assertEqual(
                 len(simplejson.loads(response.content)['posts']),
                 0)
+
+    def test_vote(self):
+        response = self.client.get(reverse('vote'))
+        self.assertEqual(response.status_code, 405)
+        response = self.client.post(reverse('vote'))
+        self.assertEqual(response.status_code, 200)

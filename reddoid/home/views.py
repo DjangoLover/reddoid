@@ -46,6 +46,14 @@ class PostsView(AjaxView):
         return self.render_to_response({'posts': posts})
 
 
+class VoteView(AjaxView):
+
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        return self.render_to_response({})
+
+
 class HomeView(TemplateView):
     template_name = 'home/home.html'
 

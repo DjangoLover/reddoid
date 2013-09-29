@@ -165,8 +165,10 @@ LOGGING = {
 
 # python social auth
 AUTHENTICATION_BACKENDS = (
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOAuth',
-    'social.backends.facebook.FacebookOAuth2',
     'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -177,5 +179,3 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
 )
-
-POSTS_SOURCES = ['TwitterSource', 'GooglePlusSource']

@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from home.views import HomeView, PostsView
+from home.views import HomeView, PostsView, VoteView
 from entities.views import LinkListView
 
 
@@ -15,6 +15,7 @@ urlpatterns = patterns(
             HomeView.as_view(), name='home'),
     url(r'^posts/$', PostsView.as_view(), name='posts'),
     url(r'^links/$', LinkListView.as_view(), name='links'),
+    url(r'^vote/$', VoteView.as_view(), name='vote'),
 )
 
 urlpatterns += patterns(
