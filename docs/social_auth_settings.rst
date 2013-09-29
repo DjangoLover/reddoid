@@ -19,3 +19,5 @@ if using
     urlpatterns += patterns('',
         url('', include('social.apps.django_app.urls', namespace='social'))
     )
+
+Click "Create Access Tocken" and save it ot settings.
