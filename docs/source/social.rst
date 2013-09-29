@@ -1,7 +1,10 @@
 .. social services integration
 
-Google+ API
-===========
+Social services integration
+==============================
+
+Google+
+--------------
 
 We obtains users activities (i.e. news feeds) using Google+ API.
 google-api-python-client library allows to simplify using the api in Python app.
@@ -28,29 +31,11 @@ Here You can find what exactly data are contained in API response:
 
 We store GOOGLE_PLUS_API_KEY in settings/google_plus.py on development machine and in environment variable on heroku server.
 
-Social outh settings
-====================
-
 Twitter
 -------
 
-https://dev.twitter.com/apps/new
-
-http://127.0.0.1/login/twitter
+Set up new app at https://dev.twitter.com/apps/new
 
 Copy `twitter.sample.py` to `twitter.py`. Add your credentials.
 
-:: 
-
-    
-    {% url "social:begin" "twitter" %}
-
-if using 
-
-::
-
-    urlpatterns += patterns('',
-        url('', include('social.apps.django_app.urls', namespace='social'))
-    )
-
-Click "Create Access Tocken" and save it ot settings.
+Click "Create Access Token" and save them in settings too.
