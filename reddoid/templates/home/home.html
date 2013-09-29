@@ -2,17 +2,6 @@
 {% load home_tags %}
 
 {% block content %}
-<div class="menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-    <a href="{% url 'home' %}" class="pure-menu-heading">REDDOID</a>
-    <ul>
-        <li><a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Twitter</a></li>
-    </ul>
-    <ul class="right">
-        <li>{% date_link date "feed" False %}</li>
-        <li>{% date_link date "feed" True %}</li>
-    </ul>
-</div>
-
 <div class="content">
     <div class="posts js-posts" data-posts-url="{% url 'posts' %}" data-date="{{ date|date:'Y-m-j' }}" data-csrf="{{ csrf_token }}" data-vote-url="{% url 'vote' %}"{% if authenticated %} data-authenticated="true"{% endif %}>
     </div>
