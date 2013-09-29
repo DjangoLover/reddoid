@@ -36,6 +36,11 @@ Click button create access token, reload the page and get your access tokens::
     heroku config:set TWITTER_ACCESS_TOKEN=YOUR_TWITTER_ACCESS_TOKEN
     heroku config:set TWITTER_ACCESS_TOKEN_SECRET=YOUR_TWITTER_ACCESS_TOKEN_SECRET
 
+Go to Google `API console <https://code.google.com/apis/console/>`__ click "API Access"
+and generate new Browser key.
+
+    heroku config:set GOOGLE_PLUS_API_KEY=YOUR_GOOGLE_PLUS_API_KEY
+
 Push code to heroku::
 
     git push heroku master
