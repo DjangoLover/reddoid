@@ -6,6 +6,7 @@ from sources.models import Source, SourcesList, Post
 
 
 class LinkAdmin(admin.ModelAdmin):
+    list_display = ('url', 'date', )
     pass
 
 
@@ -22,6 +23,7 @@ class SourcesListAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
+    list_display = ('pid', 'source', 'created_time', )
     pass
 
 
