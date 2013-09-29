@@ -2,21 +2,20 @@
 {% load home_tags %}
 
 {% block content %}
-<header>
-<a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Twitter</a>
-</header>
+<div class="menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+    <a href="{% url 'home' %}" class="pure-menu-heading">REDDOID</a>
+    <ul>
+        <li><a href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}">Twitter</a></li>
+        <li><a href="{% url 'social:begin' 'gplus' %}{% if next %}?next={{ next }}{% endif %}">Google+</a></li>
+    </ul>
+    <ul class="right">
+        <li>{% date_link date False %}</li>
+        <li>{% date_link date True %}</li>
+    </ul>
+</div>
 
 <div class="content">
-    <div class="pure-g">
-        <div class="pure-u-5-6 js-posts">
-            
-        </div>
-        <div class="pure-u-1-6">
-            <div class="sidebar" data-posts-url="{% url 'posts' %}" data-date="{{ date|date:'Y-m-j' }}">
-                {% date_link date False %}
-                {% date_link date True %}
-            </div>
-        </div>
+    <div class="posts js-posts" data-posts-url="{% url 'posts' %}" data-date="{{ date|date:'Y-m-j' }}">
     </div>
 </div>
 {% endblock %}

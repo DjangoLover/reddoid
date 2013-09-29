@@ -15,4 +15,4 @@ def date_link(date, is_next=True):
         next_date = date - datetime.timedelta(days=1)
     return '<a href="%s">%s</a>' % (
         reverse('home', args=(next_date.year, next_date.month, next_date.day)),
-        datetime.datetime.strftime(next_date, '%Y-%m-%d'))
+        ('&lt; ' if not is_next else '') + datetime.datetime.strftime(next_date, '%Y-%m-%d') + (' &gt;' if is_next else ''))

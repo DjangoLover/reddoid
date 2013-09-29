@@ -17,9 +17,9 @@ jQuery(function ($) {
         },
         next_page:function() {
             $.ajax({
-                url: $('.sidebar').data('posts-url'),
+                url: $('.js-posts').data('posts-url'),
                 dataType: 'json',
-                data: {date: $('.sidebar').data('date'), page: reddoid.home.page},
+                data: {date: $('.js-posts').data('date'), page: reddoid.home.page},
                 type: 'GET',
                 success: function (data) {
                     if(data['posts'].length) {
