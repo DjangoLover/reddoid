@@ -10,6 +10,8 @@ from entities.models import Link, LinkPost, Image, ImagePost
 from sources.models import Source, Post
 from sources.backends import GooglePlusSource, TwitterSource
 
+IMAGE_LINK_STOPWORDS = ['instagram.com', 'pic.twitter.com']
+
 
 class Command(BaseCommand):
     # args = '<poll_id poll_id ...>'
@@ -45,12 +47,14 @@ class Command(BaseCommand):
                         display_url = url.get('display_url', None)
                         if not expanded_url or not display_url:
                             continue
+                        if any([w in expanded_url for w in IMAGE_LINK_STOPWORDS]):
+                            print 'this is image url: ', expanded_url
+                            continue
                         self.stdout.write(expanded_url)
                         link, is_created = Link.objects.get_or_create(
                             url=expanded_url,
                             date=post_created_at.date(),
                             defaults={
-                                'title': display_url,
                             })
                         LinkPost.objects.get_or_create(
                             link=link, post=post)
@@ -97,7 +101,6 @@ class Command(BaseCommand):
                                 link, is_created = Link.objects.get_or_create(
                                     url=expanded_url,
                                     defaults={
-                                        'title': display_url,
                                         'date': date.today()})
                                 LinkPost.objects.get_or_create(
                                     link=link, post=post)
