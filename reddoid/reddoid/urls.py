@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from home.views import HomeView, PostsView, VoteView
 from entities.views import LinksHtmlView, LinksAjaxView
+from sources.views import SourcesView
 
 
 admin.autodiscover()
@@ -20,6 +21,7 @@ urlpatterns = patterns(
     url(r'^posts/$', PostsView.as_view(), name='posts'),
     url(r'^json/links/$', LinksAjaxView.as_view(), name='json-links'),
     url(r'^vote/$', VoteView.as_view(), name='vote'),
+    url(r'^sources/$', SourcesView.as_view(), name='sources')
 )
 
 urlpatterns += patterns(
